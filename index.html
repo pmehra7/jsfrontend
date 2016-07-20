@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html ng-app="irs-metrics-app" lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="shortcut icon" href="assets/ico/favicon.ico">
+      <title>Web Application Usage Statistics Reports</title>
+      <!-- Bootstrap core CSS -->
+      <link href="assets/css/bootstrap.css" rel="stylesheet">
+      <link href="assets/css/style.css" rel="stylesheet">
+      <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/css/bootstrap-combined.min.css">
+      <script src="assets/js/bootstrap.min.js"></script>
+      <script src="assets/js/modernizr.js"></script>
+      <script src="assets/js/angular.min.js"></script>
+      <script type="text/javascript" src="assets/js/angular-datepicker.js"></script>
+      <script rel="stylesheet" src="assets/css/angular-datepicker.css"></script>
+      <script type="text/javascript" src="assets/js/lodash.js"></script>
+      <script type="text/javascript" src="assets/js/angularjs-dropdown-multiselect.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-touch.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js"></script>
+      <script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
+      <script src="http://ui-grid.info/docs/grunt-scripts/pdfmake.js"></script>
+      <script src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script>
+      <script src="http://ui-grid.info/release/ui-grid.js"></script>
+      <link rel="stylesheet" href="assets/css/ui-grid.css" type="text/css">
+      <script src="apps.js"></script>     
+   </head>
+    
+   <body>
+      <!-- Fixed navbar {{ dateFrom | date: 'yyyy-MM-dd'}}-->
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+         <div class="container">
+            <div ng-controller="eventSum">
+                <div class="navbar-header">
+                    <div class = "row1">Web Application Usage Statistics Reports</div>
+                    <div class = "row2">Last Refreshed: {{ utcStamp | date:'yyyy-MM-dd HH:mm:ss' }}</div>
+                    <div class = "row3">IRS Analytics Portal</div>
+                </div>
+            </div>
+         </div>
+         <ul class="logo">
+            <img src="assets/img/logo-irs.png" style="width:90px;height:50px;" align="left">
+         </ul>
+      </div>
+       
+    <form name="irsForm">
+       <div ng-controller="eventSum">
+          <div id="sidebar">
+
+              <h5 style="text-align:center">Report Type: </h5>
+              <select ng-init="reportType = reports[0]" ng-model="reportType" ng-options="report as report.name for report in reports" style="text-align:center;display:block;margin: 0 auto;" required="true"></select>
+
+              <br>
+              <h5 style="text-align:center">Report Style: </h5>
+              <select ng-init="reportStyle = reportStyles[0]" ng-model="reportStyle" ng-options="report as report.name for report in reportStyles" style="text-align:center;display:block;margin: 0 auto;" required="true"></select>
+
+              <br>
+              <h5 style="text-align:center">Report Frequency: </h5>
+              <select ng-init="reportFreq = reportFreqs[0]" ng-model="reportFreq" ng-options="report as report.name for report in reportFreqs" style="text-align:center;display:block;margin: 0 auto;" required="true"></select>
+
+              <br>
+              <div id="summary" ng-show="reportStyle.id == 1">
+              <h5 style="text-align:center">Report From: </h5>
+              <input type="date" ng-model="dateFrom" style="display:block;margin: 0 auto;" required="true" ng-mouseenter="mouseSwitch = 5" ng-mouseleave="mouseSwitch = 6"/>
+                    <div ng-show="mouseSwitch==5">
+                        <div ng-show="dateFrom == null" style="color:maroon" role="alert" style="text-align:center;">Please enter a valid date: mm/dd/yyyy</div>
+                    </div>
+              </div>
+
+              <div id= "summary" ng-show="reportStyle.id == 2"> 
+              <h5 style="text-align:center">Report From: </h5>
+              <input type="date" ng-model="dateFrom" style="display:block;margin: 0 auto;" required="true"/>  
+              <h5 style="text-align:center">Report To: </h5>
+              <input type="date" ng-model="dateTill" style="display:block;margin: 0 auto;" required="true"/>  
+              </div>
+
+              <br>
+              <h5 style="text-align:center">Event Categories: </h5>
+              <div ng-dropdown-multiselect="" options="categoryData" selected-model="categoryModel" extra-settings="categorySettings" style="text-align:center;display:block;margin: 0 auto;"></div>
+
+              <br>
+              <button class="btn btn-theme" id="subButton" ng-click="getAPI();loadNewFilter()" ng-disabled="irsForm.$invalid" style="text-align:center;display:block;margin: 0 auto;">Submit</button>
+	      <button class="btn btn-theme" id="clearButton" ng-click="resetForm()" style="text-align:center;display:block;margin: 0 auto;">Clear</button>
+
+          </div>
+        </form>
+      
+       
+          <div id="mainbar">
+              <div class="repTitle">{{ reportType.name }} {{ reportDate }}</div>
+              <br>
+              <div class="grid" ui-grid-grouping ui-grid-selection ui-grid="gridOptions" style="height:500px"></div>
+              <!--<p>{{ apiEndpoint }}</p>-->
+          </div>
+           
+           
+      </div>
+    
+      <script src="assets/js/jquery-1.11.3.min.js"></script>
+      <script src="assets/js/retina-1.1.0.js"></script>
+      <script src="assets/js/jquery.hoverdir.js"></script>
+      <script src="assets/js/jquery.hoverex.min.js"></script>
+      <script src="assets/js/jquery.prettyPhoto.js"></script>
+      <script src="assets/js/jquery.isotope.min.js"></script>
+      <script src="assets/js/custom.js"></script>
+   </body>
+</html>

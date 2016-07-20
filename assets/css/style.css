@@ -1,0 +1,127 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,700,900);
+@import url(http://fonts.googleapis.com/css?family=Lato:400,900);
+@import url('http://getbootstrap.com/dist/css/bootstrap.css');
+@import url("prettyPhoto.css") screen;
+@import url("hoverex-all.css") screen;
+
+.container{
+    align: center;
+    margin: 0 auto;
+}
+
+#subButton{
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
+
+#clearButton{
+    position: absolute;
+    bottom: 4%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
+
+#sidebar {
+    position:absolute;
+    top:130px; bottom:0; left:0;
+    width:20%;
+    background:#CAEEFA;
+}
+
+#mainbar {
+    position:absolute;
+    top:130px; bottom:0; left:20%;
+    width:80%;
+    background:#FFFFFF;
+}
+
+.repTitle{
+    font-family: 'Calibri', sans-serif;
+	font-weight: 700;
+    font-size: 27px;
+    align: center;
+    text-align:center;
+    display:block;
+    margin: 0 auto;
+    color:black;
+    padding-top: 3%;
+}
+
+.logo{
+	width: 90%;
+    font-family: 'Calibri', sans-serif;
+	font-weight: 900;
+    font-size: 27px;
+    color: white;
+    text-align: center;
+    align: center;
+    margin: 0 auto;
+    position: fixed;
+    padding-top: 1.5%;
+    padding-left: 2%;
+}
+
+.row1{
+	width: 80%;
+    font-family: 'Calibri', sans-serif;
+	font-weight: 900;
+    font-size: 27px;
+    color: white;
+    text-align: center;
+    align: center;
+    margin: 0 auto;
+    position: fixed;
+    padding-top: 3%;
+}
+
+.row2{
+	width: 90%;
+    font-family: 'Calibri', sans-serif;
+	font-weight: 500;
+    font-size: 18px;
+    color: white;
+    text-align: right;
+    display: inline-block;
+    position: absolute;
+}
+
+test {
+    padding-top: 3.5%;
+    position: fixed;
+}
+
+.row3{
+	width: 90%;
+    font-family: 'Calibri', sans-serif;
+	font-weight: 500;
+    font-size: 18px;
+    color: white;
+    text-align: right;
+    display: inline-block;
+    position: absolute;
+    padding-top: 3%;
+}
+
+.navbar {
+	min-height: 130px;
+	padding-top: 20px;
+	margin-bottom: 10px;
+    width: 100%;
+    background-color: #384452;
+	border-color: transparent;
+}
+
+.grid {
+  width: 1050px;
+  height: 350px;
+}
+
+.ui-grid-category {
+  text-align: center;
+  border-right: 0px;
+  box-shadow: -1px 1px #FFFFFF;
+}
