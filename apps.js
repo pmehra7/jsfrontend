@@ -273,9 +273,11 @@ app.controller("eventSum", function($scope, $rootScope, $interval, $http) {
                     columnDefs: [
                       {name: 'eventCategory', category:'Report Data', grouping: { groupPriority: 0 }, width: $scope.cellWidth, enableColumnMenu: false},
                       {name:'eventType', category:'Report Data', width: $scope.cellWidth, enableColumnMenu: false},
-                      {name:'eventCount', category:'Report Data', width: $scope.cellWidth, enableColumnMenu: false},
-                      {name:'eventMinValue', category:'Report Data', width: $scope.cellWidth, enableColumnMenu: false},
-                      {name:'eventMaxValue', category:'Report Data', width: $scope.cellWidth, enableColumnMenu: false}
+                      {name:'Enum 1', category:'Report Data', width: $scope.cellWidth, enableColumnMenu: false},
+                      {name:'Enum 2', category:'Report Data', width: $scope.cellWidth, enableColumnMenu: false},
+                      {name:'Enum 3', category:'Report Data', width: $scope.cellWidth, enableColumnMenu: false},
+                      {name:'Enum 4', category:'Report Data', width: $scope.cellWidth, enableColumnMenu: false},
+                      {name:'Enum 5', category:'Report Data', width: $scope.cellWidth, enableColumnMenu: false}
                       ],
                     data: $scope.testIn.sort(dynamicSort("eventCategory")),
                     onRegisterApi: function( gridApi ) {
